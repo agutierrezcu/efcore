@@ -55,7 +55,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     savepoint.
         /// </summary>
         /// <param name="savepointName"> The name of the savepoint to be created. </param>
-        void Save([NotNull] string savepointName);
+        void Save([NotNull] string savepointName) => throw new NotSupportedException();
 
         /// <summary>
         ///     Creates a savepoint in the transaction. This allows all commands that are executed after the savepoint
@@ -65,13 +65,14 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="savepointName"> The name of the savepoint to be created. </param>
         /// <param name="cancellationToken"> The cancellation token. </param>
         /// <returns> A <see cref="Task" /> representing the asynchronous operation. </returns>
-        Task SaveAsync([NotNull] string savepointName, CancellationToken cancellationToken = default);
+        Task SaveAsync([NotNull] string savepointName, CancellationToken cancellationToken = default)
+            => throw new NotSupportedException();
 
         /// <summary>
         ///     Rolls back all commands that were executed after the specified savepoint was established.
         /// </summary>
         /// <param name="savepointName"> The name of the savepoint to roll back to. </param>
-        void Rollback([NotNull] string savepointName);
+        void Rollback([NotNull] string savepointName) => throw new NotSupportedException();
 
         /// <summary>
         ///     Rolls back all commands that were executed after the specified savepoint was established.
@@ -79,14 +80,15 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="savepointName"> The name of the savepoint to roll back to. </param>
         /// <param name="cancellationToken"> The cancellation token. </param>
         /// <returns> A <see cref="Task" /> representing the asynchronous operation. </returns>
-        Task RollbackAsync([NotNull] string savepointName, CancellationToken cancellationToken = default);
+        Task RollbackAsync([NotNull] string savepointName, CancellationToken cancellationToken = default)
+            => throw new NotSupportedException();
 
         /// <summary>
         ///     Destroys a savepoint previously defined in the current transaction. This allows the system to
         ///     reclaim some resources before the transaction ends.
         /// </summary>
         /// <param name="savepointName"> The name of the savepoint to release. </param>
-        void Release([NotNull] string savepointName);
+        void Release([NotNull] string savepointName) => throw new NotSupportedException();
 
         /// <summary>
         ///     Destroys a savepoint previously defined in the current transaction. This allows the system to
@@ -95,7 +97,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="savepointName"> The name of the savepoint to release. </param>
         /// <param name="cancellationToken"> The cancellation token. </param>
         /// <returns> A <see cref="Task" /> representing the asynchronous operation. </returns>
-        Task ReleaseAsync([NotNull] string savepointName, CancellationToken cancellationToken = default);
+        Task ReleaseAsync([NotNull] string savepointName, CancellationToken cancellationToken = default)
+            => throw new NotSupportedException();
 
         /// <summary>
         ///     Gets a value that indicates whether this <see cref="IDbContextTransaction"/> instance supports
@@ -108,6 +111,6 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     <c>true</c> if this <see cref="IDbContextTransaction"/> instance supports database savepoints;
         ///     otherwise, <c>false</c>.
         /// </returns>
-        bool AreSavepointsSupported { get; }
+        bool AreSavepointsSupported => false;
     }
 }
