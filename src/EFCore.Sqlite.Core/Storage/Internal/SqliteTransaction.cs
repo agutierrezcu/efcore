@@ -42,7 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         /// <inheritdoc />
         public override async Task SaveAsync(string savepointName, CancellationToken cancellationToken = default)
         {
-            await using var command = Connection.DbConnection.CreateCommand();
+            using var command = Connection.DbConnection.CreateCommand();
             command.Transaction = _dbTransaction;
             command.CommandText = "SAVEPOINT " + savepointName;
             await command.ExecuteNonQueryAsync(cancellationToken);
@@ -60,7 +60,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         /// <inheritdoc />
         public override async Task RollbackAsync(string savepointName, CancellationToken cancellationToken = default)
         {
-            await using var command = Connection.DbConnection.CreateCommand();
+            using var command = Connection.DbConnection.CreateCommand();
             command.Transaction = _dbTransaction;
             command.CommandText = "ROLLBACK TO " + savepointName;
             await command.ExecuteNonQueryAsync(cancellationToken);
@@ -78,7 +78,7 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal
         /// <inheritdoc />
         public override async Task ReleaseAsync(string savepointName, CancellationToken cancellationToken = default)
         {
-            await using var command = Connection.DbConnection.CreateCommand();
+            using var command = Connection.DbConnection.CreateCommand();
             command.Transaction = _dbTransaction;
             command.CommandText = "RELEASE " + savepointName;
             await command.ExecuteNonQueryAsync(cancellationToken);
