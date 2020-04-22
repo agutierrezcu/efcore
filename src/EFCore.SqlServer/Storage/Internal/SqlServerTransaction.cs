@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
 {
-    public class SqlServerTransaction : RelationalTransaction
+    public class SqlServerTransaction : RelationalTransaction, IDbContextTransaction
     {
         private readonly DbTransaction _dbTransaction;
 
@@ -31,7 +31,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
             => _dbTransaction = transaction;
 
         /// <inheritdoc />
-        public override void Save(string savepointName)
+        public virtual void Save(string savepointName)
         {
             using var command = Connection.DbConnection.CreateCommand();
             command.Transaction = _dbTransaction;
@@ -40,7 +40,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         }
 
         /// <inheritdoc />
-        public override async Task SaveAsync(string savepointName, CancellationToken cancellationToken = default)
+        public virtual async Task SaveAsync(string savepointName, CancellationToken cancellationToken = default)
         {
             using var command = Connection.DbConnection.CreateCommand();
             command.Transaction = _dbTransaction;
@@ -49,7 +49,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         }
 
         /// <inheritdoc />
-        public override void Rollback(string savepointName)
+        public virtual void Rollback(string savepointName)
         {
             using var command = Connection.DbConnection.CreateCommand();
             command.Transaction = _dbTransaction;
@@ -58,7 +58,7 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         }
 
         /// <inheritdoc />
-        public override async Task RollbackAsync(string savepointName, CancellationToken cancellationToken = default)
+        public virtual async Task RollbackAsync(string savepointName, CancellationToken cancellationToken = default)
         {
             using var command = Connection.DbConnection.CreateCommand();
             command.Transaction = _dbTransaction;
@@ -67,6 +67,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal
         }
 
         /// <inheritdoc />
-        public override bool AreSavepointsSupported => true;
+        public virtual bool AreSavepointsSupported => true;
     }
 }

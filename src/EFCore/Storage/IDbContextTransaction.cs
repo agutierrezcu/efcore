@@ -88,7 +88,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         ///     reclaim some resources before the transaction ends.
         /// </summary>
         /// <param name="savepointName"> The name of the savepoint to release. </param>
-        void Release([NotNull] string savepointName) => throw new NotSupportedException();
+        void Release([NotNull] string savepointName) { }
 
         /// <summary>
         ///     Destroys a savepoint previously defined in the current transaction. This allows the system to
@@ -98,7 +98,7 @@ namespace Microsoft.EntityFrameworkCore.Storage
         /// <param name="cancellationToken"> The cancellation token. </param>
         /// <returns> A <see cref="Task" /> representing the asynchronous operation. </returns>
         Task ReleaseAsync([NotNull] string savepointName, CancellationToken cancellationToken = default)
-            => throw new NotSupportedException();
+            => Task.CompletedTask;
 
         /// <summary>
         ///     Gets a value that indicates whether this <see cref="IDbContextTransaction"/> instance supports
