@@ -74,7 +74,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
                 innerEnumerable,
                 Expression.Constant(shaperLambda.Compile()),
                 Expression.Constant(_contextType),
-                Expression.Constant(_logger));
+                Expression.Constant(_logger),
+                Expression.Constant(PerformIdentityResolution));
         }
 
         private static readonly MethodInfo _tableMethodInfo

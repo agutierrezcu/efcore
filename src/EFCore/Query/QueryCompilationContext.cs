@@ -69,6 +69,7 @@ namespace Microsoft.EntityFrameworkCore.Query
         public virtual IModel Model { get; }
         public virtual IDbContextOptions ContextOptions { get; }
         public virtual bool IsTracking { get; internal set; }
+        public virtual bool PerformIdentityResolution { get; internal set; }
         public virtual bool IsBuffering { get; }
         public virtual bool IgnoreQueryFilters { get; internal set; }
         public virtual ISet<string> Tags { get; } = new HashSet<string>();
